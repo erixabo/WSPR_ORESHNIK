@@ -1,0 +1,29 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environment
+venv/
+ENV/
+.env/
+.venv/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE beállítások
+.vscode/
+.idea/
+*.swp
+
+# OS specifikus fájlok
+.DS_Store
+Thumbs.db
+
+# CSV és más nagy adatfájlok (ha nem akarod feltölteni őket)
+*.csv
+*.tsv
+*.log
