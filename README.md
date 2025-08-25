@@ -148,7 +148,7 @@ Ez a kísérlet **szabad, önkéntes kutatás**, amely a nyílt rádiós adatok
 lehetőségeit vizsgálja.  
 
 Érdemes megemlíteni, hogy több mint harminc éve **Linus Torvalds** publikálta a 
-Linux rendszermag első verzióját a GNU közösség felé – aminek köszönhetően ma bárki,  
-szabadon futtathatunk ilyen elemzéseket teljesen szabad UNIX-like rendszereken.  
+Linux rendszermag első verzióját a **GNU** közösség felé – aminek köszönhetően ma bárki,  
+szabadon futtathat ilyen elemzéseket teljesen szabad, **UNIX**-like rendszereken.  
 
 Szabadság és nyitottság, MIT, GNU.

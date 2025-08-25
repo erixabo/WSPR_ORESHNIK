@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>README.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///home/a/Dokumentumok/WSPR_ORESHNIK/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///home/a/Dokumentumok/WSPR_ORESHNIK/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="wspr-doppler-k%C3%ADs%C3%A9rlet-%E2%80%93-2024-11-21-dnipro-rak%C3%A9tacsap%C3%A1s">WSPR Doppler-kísérlet – 2024-11-21, Dnipro rakétacsapás</h1>
+<p>Ez a kísérlet annak vizsgálatára készült, hogy a WSPR (Weak Signal Propagation Reporter)<br>
+globális amatőrrádiós hálózat adataiban felismerhetők-e olyan rendellenességek,<br>
+amelyek egy gyorsan mozgó objektum – például egy ballisztikus rakéta – által okozott<br>
+<strong>Doppler-eltolódásra</strong> utalhatnak.</p>
+<hr>
+<h2 id="inspir%C3%A1ci%C3%B3-%C3%A9s-h%C3%A1tt%C3%A9r">Inspiráció és háttér</h2>
+<p>A kísérlet ötlete nem a semmiből jött.<br>
+Először <strong>Gőzse István kollégámtól</strong> hallottam arról a kutatásról, amelyben a<br>
+WSPR-hálózat adatait használták fel az eltűnt maláj utasszállító, a<br>
+<strong>Malaysia Airlines MH370</strong> utolsó repülési szakaszának rekonstruálására.</p>
+<p>A kutatók több millió WSPR-spotot elemeztek, és ezekből következtettek arra,<br>
+merre haladhatott a gép az Indiai-óceán felett, amikor a fedélzeti transzponderek<br>
+már rég elnémultak.<br>
+Ez volt az első olyan pillanat, amikor a WSPR mint <strong>globális rádiós érzékelő hálózat</strong><br>
+meghaladta eredeti, amatőr rádiós szerepét, és olyan információt szolgáltatott, amely<br>
+világszinten is egyedi és megismételhetetlen.</p>
+<p>Ez inspirált arra, hogy megnézzük: vajon hasonló módon egy másik, jól dokumentált esemény,<br>
+a <strong>2024-11-21-i Dnipro elleni Oreshnik rakétacsapás</strong> nyomot hagyott-e a WSPR adatokban.</p>
+<hr>
+<h2 id="k%C3%ADs%C3%A9rlet-c%C3%A9lja">Kísérlet célja</h2>
+<ul>
+<li>A 2024-11-21 02:00–05:00 UTC közötti WSPR-spotok elemzése.</li>
+<li>Vizsgálni, hogy az <strong>Ukrajna felett áthaladó linkekben</strong> van-e szokatlan <code>drift</code> (frekvenciaeltolódás).</li>
+<li>Koncentráció a <strong>20 m, 30 m és 40 m</strong> sávokra, mert ezek jellemzően aktívak<br>
+EU–RU összeköttetésekben.</li>
+</ul>
+<p>A WSPR <code>drift</code> értéke általában ±1 Hz-en belül marad.<br>
+A ±2 Hz feletti érték <strong>szokatlan</strong>, és lehet:</p>
+<ul>
+<li>instabil adó/vevő oszcillátor eredménye,</li>
+<li>ionoszférikus anomália,</li>
+<li>vagy egy <strong>valódi gyors objektum Doppler-hatása</strong>.</li>
+</ul>
+<hr>
+<h2 id="adatforr%C3%A1s">Adatforrás</h2>
+<ul>
+<li><strong><a href="https://wspr.live/">wspr.live</a></strong> – ClickHouse adatbázis, amely a teljes WSPR történelmet tartalmazza.</li>
+<li>Tábla: <code>wspr.rx</code></li>
+<li>SQL-szerű lekérdezésekkel érhető el:
+<ul>
+<li><code>https://db1.wspr.live/?query=...</code></li>
+<li>támogatott formátumok: <code>CSV</code>, <code>JSON</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="el%C5%91k%C3%A9sz%C3%BCletek-ubuntu--devuan-linux">Előkészületek (Ubuntu / Devuan Linux)</h2>
+<p>A kísérlet Ubuntu és Devuan Linux rendszereken készült.<br>
+A futtatáshoz egy <strong>virtuális környezet (venv)</strong> létrehozása ajánlott.</p>
+<h3 id="virtu%C3%A1lis-k%C3%B6rnyezet-l%C3%A9trehoz%C3%A1sa">Virtuális környezet létrehozása</h3>
+<pre class="hljs"><code><div>python3 -m venv venv
+<span class="hljs-built_in">source</span> venv/bin/activate
+</div></code></pre>
+<h3 id="sz%C3%BCks%C3%A9ges-csomagok-telep%C3%ADt%C3%A9se">Szükséges csomagok telepítése</h3>
+<pre class="hljs"><code><div>pip install --upgrade pip
+pip install pandas matplotlib requests
+</div></code></pre>
+<hr>
+<h2 id="adatok-lek%C3%A9r%C3%A9se">Adatok lekérése</h2>
+<p>Példa lekérdezés 2024-11-21 02:00–05:00 UTC, 20/30/40 m sávokra:</p>
+<pre class="hljs"><code><div>SELECT time, band, tx_sign, tx_lat, tx_lon, rx_sign, rx_lat, rx_lon, frequency, snr, drift
+FROM wspr.rx
+WHERE time &gt;= '2024-11-21 02:00:00'
+  AND time &lt; '2024-11-21 05:00:00'
+  AND band IN (7,10,14)
+FORMAT CSV
+</div></code></pre>
+<hr>
+<h2 id="python-szkript">Python szkript</h2>
+<p><code>wspr_fetch.py</code>:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> urllib.request, urllib.parse, json, pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wsprlive_get</span><span class="hljs-params">(query)</span>:</span>
+    url = <span class="hljs-string">"https://db1.wspr.live/?query="</span> + urllib.parse.quote_plus(query + <span class="hljs-string">" FORMAT JSON"</span>)
+    contents = urllib.request.urlopen(url).read()
+    <span class="hljs-keyword">return</span> json.loads(contents.decode(<span class="hljs-string">"UTF-8"</span>))[<span class="hljs-string">"data"</span>]
+
+query = <span class="hljs-string">"""
+SELECT time, band, tx_sign, tx_lat, tx_lon, rx_sign, rx_lat, rx_lon, frequency, snr, drift
+FROM wspr.rx
+WHERE time &gt;= '2024-11-21 02:00:00'
+  AND time &lt; '2024-11-21 05:00:00'
+  AND band IN (7,10,14)
+"""</span>
+
+rows = wsprlive_get(query)
+cols = [<span class="hljs-string">"time"</span>,<span class="hljs-string">"band"</span>,<span class="hljs-string">"tx_sign"</span>,<span class="hljs-string">"tx_lat"</span>,<span class="hljs-string">"tx_lon"</span>,<span class="hljs-string">"rx_sign"</span>,<span class="hljs-string">"rx_lat"</span>,<span class="hljs-string">"rx_lon"</span>,<span class="hljs-string">"frequency"</span>,<span class="hljs-string">"snr"</span>,<span class="hljs-string">"drift"</span>]
+df = pd.DataFrame(rows, columns=cols)
+df.to_csv(<span class="hljs-string">"wspr_20241121_0200_0500.csv"</span>, index=<span class="hljs-literal">False</span>)
+
+print(<span class="hljs-string">"Sorok száma:"</span>, len(df))
+print(<span class="hljs-string">"Mentve: wspr_20241121_0200_0500.csv"</span>)
+</div></code></pre>
+<hr>
+<h2 id="k%C3%B6vetkez%C5%91-l%C3%A9p%C3%A9sek">Következő lépések</h2>
+<ol>
+<li>A CSV elemzése Pandas segítségével.</li>
+<li>Geometriai szűrés: mely linkek haladnak át Ukrajna felett?</li>
+<li>Drift-anomáliák (<code>abs(drift) &gt; 2</code>) kiemelése.</li>
+<li>Eredmények idő- és térképes ábrázolása.</li>
+</ol>
+<hr>
+<h2 id="kapcsol%C3%B3d%C3%B3-kutat%C3%A1sok">Kapcsolódó kutatások</h2>
+<ul>
+<li><strong>MH370 és a WSPR</strong><br>
+2021-ben és 2022-ben több kutatócsoport is vizsgálta az eltűnt maláj utasszállító,<br>
+a Malaysia Airlines MH370 útját.<br>
+A WSPR-hálózat több millió spotját elemezve próbálták meghatározni a repülőgép<br>
+utolsó útvonalát az Indiai-óceán felett.<br>
+Bár az eredmények vitatottak, a módszer egyedülálló példája annak, hogyan válhat a<br>
+globális amatőrrádiós infrastruktúra váratlanul egyfajta „passzív radarhálózattá”.</li>
+</ul>
+<p>Forrás:</p>
+<ul>
+<li><a href="https://www.mdpi.com/2504-3900/83/1/18">MH370 WSPR Tracking Project – Scientific Reports</a></li>
+</ul>
+<hr>
+<h2 id="z%C3%A1r%C3%B3-megjegyz%C3%A9s">Záró megjegyzés</h2>
+<p>Ez a kísérlet <strong>szabad, önkéntes kutatás</strong>, amely a nyílt rádiós adatok<br>
+lehetőségeit vizsgálja.</p>
+<p>Érdemes megemlíteni, hogy több mint harminc éve <strong>Linus Torvalds</strong> publikálta a<br>
+Linux rendszermag első verzióját a <strong>GNU</strong> közösség felé – aminek köszönhetően ma bárki,<br>
+szabadon futtathat ilyen elemzéseket teljesen szabad, <strong>UNIX</strong>-like rendszereken.</p>
+<p>Szabadság és nyitottság, MIT, GNU.</p>
+
+</body>
+
+</html>
