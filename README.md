@@ -26,7 +26,7 @@ A program lekéri az adatokat, és helyi gyorsítótárként a `data/wspr_202411
 
 A `src/wspr_fetch.py`, `src/driftts_per_min_orig.py` és `src/filter_drifts.py` az eredeti, általános letöltési/ábrázolási próbák. A `Figure_1.png` az összes link percenkénti átlagát mutatja, nem az esemény útvonalára szűrt eredményt.
 
-`README.pdf` egy korábbi, 2025-ös pillanatfelvétel; nem tartalmazza ezt az elemzést. Az aktuális leírás és eredmény az itt hivatkozott Markdown-fájlokban van.
+Az előző README egy hibás MDPI-hivatkozást tartalmazott: az a vállmerevség kezeléséről szólt, nem az MH370-ről. Az elavult PDF-et eltávolítottam. Az MH370-WSPR-kísérlet hátteréhez lásd a [szerzők műszaki jelentését](https://www.mh370search.com/2022/03/14/mh370-wspr-technical-report/); ez a szerzők saját beszámolója, nem független validáció, és a jelen vizsgálat nem támaszkodik rá.
 
 ## Források és korlátok
 
