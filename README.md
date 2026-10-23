@@ -1,154 +1,38 @@
-# WSPR Doppler-kísérlet – 2024-11-21, Dnipro rakétacsapás
+# WSPR-vizsgálat – Dnipro, 2024-11-21
 
-Ez a kísérlet annak vizsgálatára készült, hogy a WSPR (Weak Signal Propagation Reporter) 
-globális amatőrrádiós hálózat adataiban felismerhetők-e olyan rendellenességek,
-amelyek egy gyorsan mozgó objektum – például egy ballisztikus rakéta – által okozott 
-**Doppler-eltolódásra** utalhatnak.
+## Eredmény röviden
 
----
+A reprodukciós teszt **nem talált kimutatható drift-anomáliát** a Dniprohoz vezető, becsült rakétaútvonal közelében. A kevés releváns, ismétlődő adó–vevő útvonal miatt ez gyenge negatív eredmény: nem bizonyítja, hogy semmilyen kölcsönhatás nem történt. A teljes módszer és az eredménytábla az [elemzési jegyzőkönyvben](analysis-results-2024-11-21.md) olvasható.
 
-## Inspiráció és háttér
+Ez feltáró kísérlet volt, nem validált passzív radar. A WSPR `drift` mező önmagában nem rakéta-Doppler-mérés: az adatbázis egysége bizonytalan, a dekóder becsléséhez pedig az adó és a vevő frekvenciasodródása is hozzájárulhat.
 
-A kísérlet ötlete nem a semmiből jött.  
-Először **Gőzse István kollégámtól** hallottam arról a kutatásról, amelyben a 
-WSPR-hálózat adatait használták fel az eltűnt maláj utasszállító, a 
-**Malaysia Airlines MH370** utolsó repülési szakaszának rekonstruálására.  
+## Vizsgálat
 
-A kutatók több millió WSPR-spotot elemeztek, és ezekből következtettek arra, 
-merre haladhatott a gép az Indiai-óceán felett, amikor a fedélzeti transzponderek 
-már rég elnémultak.  
-Ez volt az első olyan pillanat, amikor a WSPR mint **globális rádiós érzékelő hálózat** 
-meghaladta eredeti, amatőr rádiós szerepét, és olyan információt szolgáltatott, amely 
-világszinten is egyedi és megismételhetetlen.  
+A [wspr.live](https://wspr.live/) nyilvános `wspr.rx` adatbázisából lekérdeztük a 40, 30 és 20 méteres sávokat (`band` 7, 10, 14) 2024-11-21 02:40–03:40 UTC között. A vizsgált eseményablak 03:00–03:20 UTC; ezt a reggeli támadás időzítéséből és a közölt, hozzávetőleg 15 perces repülési időből kerekítettük. A pontos 3D pálya és a rádióterjedési út nem ismert.
 
-Ez inspirált arra, hogy megnézzük: vajon hasonló módon egy másik, jól dokumentált esemény, 
-a **2024-11-21-i Dnipro elleni Oreshnik rakétacsapás** nyomot hagyott-e a WSPR adatokban.  
+Az adó–vevő állomások földrajzi végpontjai közti nagy kört hasonlítottuk a Kapusztyin Jar–Dnipro hozzávetőleges felszíni szakaszához (786.8 km). A számítás 50, 100, 250 és 500 km-es folyosókkal készült. Ez csak geometriai szűrés: nem modellezi az ionoszférikus visszaverődést, a jel teljes térbeli útját vagy a rakéta 3D pályáját.
 
----
+A 03:00–03:20 UTC eseményablakban az 50 km-es folyosó 36 spotot adott 32 adó–vevő–sáv kapcsolatból; csak 8 ilyen kapcsolat szerepelt az előtte és utána következő ablakban is. Az eseményablak medián driftje minden folyosón nulla volt; az eseményablakban nem volt `|drift| > 2` érték. A párosított kapcsolatok medián változása az előtte/utána ablakhoz képest nulla volt.
 
-## Kísérlet célja
+## Újrafuttatás
 
-- A 2024-11-21 02:00–05:00 UTC közötti WSPR-spotok elemzése.  
-- Vizsgálni, hogy az **Ukrajna felett áthaladó linkekben** van-e szokatlan `drift` (frekvenciaeltolódás).  
-- Koncentráció a **20 m, 30 m és 40 m** sávokra, mert ezek jellemzően aktívak 
-  EU–RU összeköttetésekben.  
-
-A WSPR `drift` értéke általában ±1 Hz-en belül marad.  
-A ±2 Hz feletti érték **szokatlan**, és lehet:
-- instabil adó/vevő oszcillátor eredménye,  
-- ionoszférikus anomália,  
-- vagy egy **valódi gyors objektum Doppler-hatása**.
-
----
-
-## Adatforrás
-
-- **[wspr.live](https://wspr.live/)** – ClickHouse adatbázis, amely a teljes WSPR történelmet tartalmazza.  
-- Tábla: `wspr.rx`  
-- SQL-szerű lekérdezésekkel érhető el:  
-  - `https://db1.wspr.live/?query=...`  
-  - támogatott formátumok: `CSV`, `JSON`  
-
----
-
-## Előkészületek (Ubuntu / Devuan Linux)
-
-A kísérlet Ubuntu és Devuan Linux rendszereken készült.  
-A futtatáshoz egy **virtuális környezet (venv)** létrehozása ajánlott.
-
-### Virtuális környezet létrehozása
+A `src/analyze_event.py` kizárólag Python alapkönyvtárat használ:
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 src/analyze_event.py
 ```
 
-### Szükséges csomagok telepítése
+A program lekéri az adatokat, és helyi gyorsítótárként a `data/wspr_20241121_0240_0340_utc.csv` fájlba menti őket. A CSV-ket a `.gitignore` kizárja; a repó ezért az elemzőkódot és az összesített eredményeket tartalmazza, nem a nyers adatmásolatot.
 
-```bash
-pip install --upgrade pip
-pip install pandas matplotlib requests
-```
+A `src/wspr_fetch.py`, `src/driftts_per_min_orig.py` és `src/filter_drifts.py` az eredeti, általános letöltési/ábrázolási próbák. A `Figure_1.png` az összes link percenkénti átlagát mutatja, nem az esemény útvonalára szűrt eredményt.
 
----
+`README.pdf` egy korábbi, 2025-ös pillanatfelvétel; nem tartalmazza ezt az elemzést. Az aktuális leírás és eredmény az itt hivatkozott Markdown-fájlokban van.
 
-## Adatok lekérése
+## Források és korlátok
 
-Példa lekérdezés 2024-11-21 02:00–05:00 UTC, 20/30/40 m sávokra:
+- [WSPR Live adatbázis és mezőleírás](https://wspr.live/) – a `drift` mezőt −3…+3 tartományúként írja le, egységét bizonytalannak jelöli.
+- [WSPR technikai leírás](https://wsjt.sourceforge.io/WSPR_QST_Nov_2010.pdf) – a dekóder driftbecslése és az adó/vevő oszcillátorainak sodródása.
+- [Ukrainska Pravda: az ukrán hírszerzés közlése a repülési időről](https://www.pravda.com.ua/eng/news/2024/11/22/7485828/).
+- [Ukrainian Air Force Telegram-archívum](https://t.me/s/kpszsu?before=23391).
 
-```
-SELECT time, band, tx_sign, tx_lat, tx_lon, rx_sign, rx_lat, rx_lon, frequency, snr, drift
-FROM wspr.rx
-WHERE time >= '2024-11-21 02:00:00'
-  AND time < '2024-11-21 05:00:00'
-  AND band IN (7,10,14)
-FORMAT CSV
-```
-
----
-
-## Python szkript
-
-`wspr_fetch.py`:
-
-```python
-import urllib.request, urllib.parse, json, pandas as pd
-
-def wsprlive_get(query):
-    url = "https://db1.wspr.live/?query=" + urllib.parse.quote_plus(query + " FORMAT JSON")
-    contents = urllib.request.urlopen(url).read()
-    return json.loads(contents.decode("UTF-8"))["data"]
-
-query = """
-SELECT time, band, tx_sign, tx_lat, tx_lon, rx_sign, rx_lat, rx_lon, frequency, snr, drift
-FROM wspr.rx
-WHERE time >= '2024-11-21 02:00:00'
-  AND time < '2024-11-21 05:00:00'
-  AND band IN (7,10,14)
-"""
-
-rows = wsprlive_get(query)
-cols = ["time","band","tx_sign","tx_lat","tx_lon","rx_sign","rx_lat","rx_lon","frequency","snr","drift"]
-df = pd.DataFrame(rows, columns=cols)
-df.to_csv("wspr_20241121_0200_0500.csv", index=False)
-
-print("Sorok száma:", len(df))
-print("Mentve: wspr_20241121_0200_0500.csv")
-```
-
----
-
-## Következő lépések
-
-1. A CSV elemzése Pandas segítségével.  
-2. Geometriai szűrés: mely linkek haladnak át Ukrajna felett?  
-3. Drift-anomáliák (`abs(drift) > 2`) kiemelése.  
-4. Eredmények idő- és térképes ábrázolása.  
-
----
-
-## Kapcsolódó kutatások
-
-- **MH370 és a WSPR**  
-  2021-ben és 2022-ben több kutatócsoport is vizsgálta az eltűnt maláj utasszállító, 
-  a Malaysia Airlines MH370 útját.  
-  A WSPR-hálózat több millió spotját elemezve próbálták meghatározni a repülőgép 
-  utolsó útvonalát az Indiai-óceán felett.  
-  Bár az eredmények vitatottak, a módszer egyedülálló példája annak, hogyan válhat a 
-  globális amatőrrádiós infrastruktúra váratlanul egyfajta „passzív radarhálózattá”.
-
-Forrás:  
-- [MH370 WSPR Tracking Project – Scientific Reports](https://www.mdpi.com/2504-3900/83/1/18)
-
----
-
-## Záró megjegyzés
-
-Ez a kísérlet **szabad, önkéntes kutatás**, amely a nyílt rádiós adatok 
-lehetőségeit vizsgálja.  
-
-Érdemes megemlíteni, hogy több mint harminc éve **Linus Torvalds** publikálta a 
-Linux rendszermag első verzióját a **GNU** közösség felé – aminek köszönhetően ma bárki,  
-szabadon futtathat ilyen elemzéseket teljesen szabad, **UNIX**-like rendszereken.  
-
-Szabadság és nyitottság, MIT, GNU.
+A következtetés csak ennyi: **a vizsgált WSPR-adatokból, ezzel a közelítő útvonal- és driftmódszerrel nem mutatható ki eseményhez köthető eltérés.**
